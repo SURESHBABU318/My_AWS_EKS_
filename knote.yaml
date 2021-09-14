@@ -23,14 +23,7 @@ spec:
           env:
             - name: MONGO_URL
               value: mongodb://mongo:27017/dev
-              resources:
-           requests:
-            cpu: 50m
-            memory: 512mi
-           limits:
-            cpu: 100m
-            memory: 1024mi
-
+             
 ---
 apiVersion: v1
 kind: Service
