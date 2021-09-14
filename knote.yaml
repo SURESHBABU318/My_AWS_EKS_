@@ -31,8 +31,6 @@ spec:
             cpu: 100m
             memory: 1024mi
 
-
-
 ---
 apiVersion: v1
 kind: Service
