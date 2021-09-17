@@ -13,15 +13,15 @@ phases:
       commands:
         - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
         - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY:$TAG"'@' Kubernetes/eks-deployment.yml
-        - $(aws ecr get-login --no-include-email)
+        - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 038269871983.dkr.ecr.us-east-2.amazonaws.com
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
-      - docker build -t my_python_eks .
+      - docker build -t my-aws-eks .
       - docker tag my-aws-eks:latest 038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks:latest
   post_build:
     commands:
-      - docker push 038269871983.dkr.ecr.us-east-2.amazonaws.com/my_python_eks:latest
+      - docker push 038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks:latest
       - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
