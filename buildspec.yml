@@ -12,8 +12,8 @@ phases:
   pre_build:
       commands:
         - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY:$TAG"'@' Kubernetes/eks-deployment.yml
-        - $(aws ecr get-login --no-include-email)
+        - sed -i 's@my-aws-eks@'"$038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks:$."'@' Kubernetes/eks-deployment.yml
+        - // (aws ecr get-login --no-include-email)
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
