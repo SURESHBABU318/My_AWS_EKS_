@@ -16,8 +16,8 @@ spec:
         tier: frontend
     spec:
       containers:
-        - name: app
-          image: learnitguide/knotejs:1.0
+        - name: knote_app
+          image: 038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks:latest
           ports:
             - containerPort: 3000
           env:
@@ -38,4 +38,4 @@ spec:
     - port: 80
       targetPort: 3000
       nodePort: 30000
-  type: NodePort
+  type: LoadBalancer
