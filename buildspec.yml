@@ -17,7 +17,7 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
-      - docker build -t $REPOSITORY:$TAG .
+      - docker build -t $REPOSITORY_URI:$TAG .
   post_build:
     commands:
       - docker push 038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks:latest
