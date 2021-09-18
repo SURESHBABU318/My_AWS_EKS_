@@ -17,7 +17,7 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
-        - docker build -t $REPOSITORY_URI:$TAG .
+        - docker build --tag $REPOSITORY_URI:$TAG .
   post_build:
     commands:
       - docker push $REPOSITORY_URI:$TAG
@@ -27,7 +27,7 @@ phases:
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
-      - kubectl apply -f Kubernetes/eks-deployment.yml 
-      - printf '[{"name":"eks-deployment","imageUri":"%s"}]' $REPOSITORY:$TAG > build.json
+      - kubectl apply -f Knote.yml 
+      - printf '[{"name":"learnitguide/knotejs:1.0","imageUri":"%s"}]' $REPOSITORY:$TAG > build.json
 artifacts:
   files: build.json
