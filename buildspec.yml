@@ -17,7 +17,7 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
-      - docker build -t 038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks .
+      - docker build -t my-aws-eks:0.1 .
       - docker tag my-aws-eks:latest 038269871983.dkr.ecr.us-east-2.amazonaws.com/my-aws-eks:latest
   post_build:
     commands:
