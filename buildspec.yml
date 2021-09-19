@@ -17,7 +17,7 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
-      - docker build -t demo-aws-eks:1.0 .
+      - docker build --tag $REPOSITORY:$TAG .
 
   post_build:
     commands:
